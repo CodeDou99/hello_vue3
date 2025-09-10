@@ -10,31 +10,29 @@
 <script lang="ts">
 export default {
   name: 'Person',
-  setup(){
-    let name='张三'
-    let age=26
-    let tel='15707201991'
-
-    function changeName(){
-      name='zhangsan'
-    }
-    function changeAge(){
-      age+=1
-    }
-    function showTel(){
-      alert(tel)
-    }
-    
-
-    return {name,age,tel,changeAge,changeName,showTel}
-  }
 
 }  
 </script>
+
+<script lang="ts" setup>
+let name = '张三'
+let age = 26
+let tel = '15707201991'
+
+function changeName() {
+  name = 'zhangsan'
+}
+function changeAge() {
+  age += 1
+}
+function showTel() {
+  alert(tel)
+}</script>
 <style>
-  button{
-    margin: 0 5px;
-  }
+button {
+  margin: 0 5px;
+}
+
 /* .person {
     background-color: skyblue;
     box-shadow: 0 0 10px;

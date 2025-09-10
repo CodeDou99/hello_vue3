@@ -10,25 +10,24 @@
 <script lang="ts">
 export default {
   name: 'Person',
-  setup(){
-    let name='张三'
-    let age=26
-    let tel='15707201991'
-
-    function changeName(){
-      name='zhangsan'
+  data() {
+    return {
+      name: '张三',
+      age: 18,
+      tel: '15707201991'
     }
-    function changeAge(){
-      age+=1
+  },
+  methods: {
+    showTel() {
+      alert(this.tel)
+    },
+    changeName() {
+      this.name = 'zhangsan'
+    },
+    changeAge() {
+      this.age +=1
     }
-    function showTel(){
-      alert(tel)
-    }
-    
-
-    return {name,age,tel,changeAge,changeName,showTel}
   }
-
 }  
 </script>
 <style>
