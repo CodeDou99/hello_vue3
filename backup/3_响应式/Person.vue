@@ -1,34 +1,45 @@
 <template>
   <div class="person">
-    <h1>watch</h1>
-    <h2>情况一:watch监控ref</h2>
-    <h2>sum: {{ sum }}</h2>
-    <button @click="addSum">sum+1</button>
+    <h2>姓名:{{ name }}</h2>
+    <h2>年龄:{{ age }}</h2>
+    <h2>汽车品牌:{{ car.brand }}</h2>
+    <h2>汽车价格:{{ car.price }}万</h2>
+    <button @click="showTel">点击查看Tel</button>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年龄</button>
+    <button @click="changeCarBrand">修改汽车品牌</button>
+    <button @click="changeCarPrice">修改汽车价格</button>
   </div>
-
-
 </template>
 
 <script lang="ts" setup>
-defineOptions({
-  name: 'Person'
-})
-import { ref, watch } from 'vue'
-let sum = ref(0)
+import { reactive, ref } from 'vue'
+let name = ref('张三')
+let age = ref(26)
+let tel = '15707201991'
 
-function addSum() {
-  sum.value += 1
+// let car = reactive({brand:'BYD',price:14.35})
+let car = { brand: ref('BYD'), price: ref(14.35) }
+
+function changeCarBrand() {
+  car.brand.value = 'BMW'
+  console.log(car.brand);
+
 }
-
-var stopWatch = watch(sum, function watchSum(newValue, oldValue) {
-  console.log(`sum变化了:${oldValue}=>${newValue}`)
-  if(newValue > 10){
-    stopWatch()
-  }
-})
+function changeCarPrice() {
+  car.price.value += 1;
+  console.log(car)
+}
+function changeName() {
+  name.value = 'zhangsan'
+}
+function changeAge() {
+  age.value += 1
+}
+function showTel() {
+  alert(tel)
+}
 </script>
-
-
 <style>
 button {
   margin: 0 5px;
