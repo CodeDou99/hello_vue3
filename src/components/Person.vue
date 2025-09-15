@@ -1,35 +1,38 @@
 <template>
   <div class="person">
-    <h1>watch</h1>
-    <h2>情况一:watch监控ref</h2>
-    <h2>sum: {{ sum }}</h2>
-    <button @click="addSum">sum+1</button>
+    <h2 ref="title2">Test</h2>
+    <button @click="showTitle2">showTitle2</button>
   </div>
-
-
 </template>
 
-<script lang="ts" setup>
-defineOptions({
-  name: 'Person'
-})
-import { ref, watch } from 'vue'
-let sum = ref(0)
 
-function addSum() {
-  sum.value += 1
+
+<script lang="ts" setup nam="Person">
+
+import { ref } from 'vue'
+
+let title2 = ref()
+
+// console.log('aaa')
+function showTitle2(){
+  console.log(title2.value)
 }
 
-var stopWatch = watch(sum, function watchSum(newValue, oldValue) {
-  console.log(`sum变化了:${oldValue}=>${newValue}`)
-  if(newValue > 10){
-    stopWatch()
-  }
-})
+document.addEventListener('DOMContentLoaded', function () {
+  // DOM 已经就绪，可以安全操作元素
+  console.log('DOM ready');
+  console.log(title2.value)
+});
+
+window.onload = function () {
+  console.log('Page fully loaded');
+  console.log(title2.value)
+};
+
 </script>
 
 
-<style>
+<style scoped>
 button {
   margin: 0 5px;
 }
