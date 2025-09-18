@@ -1,16 +1,80 @@
 <template>
   <div class="news">
+    <!-- 导航区 -->
     <ul>
-      <li><a href="#">新闻001</a></li>
-      <li><a href="#">新闻002</a></li>
-      <li><a href="#">新闻003</a></li>
-      <li><a href="#">新闻004</a></li>
+      <li v-for="news in newsList" :key="news.id">
+        <!-- <RouterLink :to="{
+          path: '/news/detail',
+          query: {
+            id: news.id,
+            title: news.title,
+            content: news.content
+          }
+        }">{{ news.title }}</RouterLink> -->
+        <!-- <RouterLink :to="{
+          name: 'xiangqing',
+          params: {
+            id: news.id,
+            title: news.title,
+            content: news.content
+          }
+        }">
+          {{ news.title }}</RouterLink> -->
+        <button @click="showNewsDetail(news)">查看新闻</button>
+        <RouterLink :to="{
+          name: 'xiangqing',
+          // params: {
+          //   id: news.id,
+          //   title: news.title,
+          //   content: news.content
+          // },
+          query: {
+            id: news.id,
+            title: news.title,
+            content: news.content
+          }
+        }">
+          {{ news.title }}</RouterLink>
+
+
+      </li>
     </ul>
+    <!-- 展示区 -->
+    <div class="news-content">
+      <RouterView></RouterView>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts" name="News">
-  
+import { reactive } from 'vue'
+import { RouterView, RouterLink, useRouter } from 'vue-router'
+
+const newsList = reactive([
+  { id: 'asfdtrfay01', title: '很好的抗癌食物', content: '西蓝花' },
+  { id: 'asfdtrfay02', title: '如何一夜暴富', content: '学IT' },
+  { id: 'asfdtrfay03', title: '震惊，万万没想到', content: '明天是周一' },
+  { id: 'asfdtrfay04', title: '好消息！好消息！', content: '快过年了' }
+])
+
+interface NewsInter{
+  id:string,
+  title:string,
+  content:string
+}
+
+const router = useRouter()
+function showNewsDetail(news:NewsInter) {
+  router.push({
+    name: 'xiangqing',
+    query: {
+      id: news.id,
+      title: news.title,
+      content: news.content
+    }
+  })
+}
+
 </script>
 
 <style scoped>
@@ -21,11 +85,13 @@
   justify-content: space-between;
   height: 100%;
 }
+
 .news ul {
   margin-top: 30px;
   list-style: none;
   padding-left: 10px;
 }
+
 .news li>a {
   font-size: 18px;
   line-height: 40px;
@@ -33,6 +99,7 @@
   color: #64967E;
   text-shadow: 0 0 1px rgb(0, 84, 0);
 }
+
 .news-content {
   width: 70%;
   height: 90%;
